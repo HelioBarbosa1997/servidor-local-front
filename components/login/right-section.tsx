@@ -78,7 +78,7 @@ export const RightSection = () => {
                         className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">Login</Button>
                     </div>
 
-                    <div>
+                    <div className="flex justify-center gap-2 mt-4 text-sm">
                         <span>Don't have an account cont?</span>
                         <Link href="//registo" className="text-[#13A4EC] font-semibold">Create Account</Link>
                     </div>
