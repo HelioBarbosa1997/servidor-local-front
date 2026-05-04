@@ -17,6 +17,7 @@ export const RegisterRight = () => {
     const [country, setCountry] = useState("")
     const [locality, setLocality] = useState("")
     const [password, setPassword] = useState("")
+    const [role, setRole] = useState("")
 
     const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value) {
@@ -74,6 +75,13 @@ export const RegisterRight = () => {
             setPassword("")
         }
     };
+    const changeRole = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value) {
+            setRole(e.target.value)
+        } else {
+            setRole("")
+        }
+    };
 
     const handleRegister = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -93,7 +101,8 @@ export const RegisterRight = () => {
                     telefone: telephone,
                     pais: country,
                     localidade: locality,
-                    password: password
+                    password: password,
+                    role: role
                 })
             }
         ).then((response) => {
@@ -106,7 +115,7 @@ export const RegisterRight = () => {
 
     return (
         <div className="w-1/2 flex flex-col justify-center">
-            <Card className="h-full flex flex-col justify-center px-14 gap-16">
+            <Card className="h-full flex flex-col justify-center px-12 gap-14">
                 <CardHeader>
                     <span className="text-5xl font-bold text-center">Register</span>
                 </CardHeader>
@@ -167,6 +176,13 @@ export const RegisterRight = () => {
                             <Input type="password" placeholder="introduce password" className="py-4 text-lg h-10"
                                 value={password}
                                 onChange={changePassword} />
+                        </div>
+
+                        <div>
+                            <Label className="font-bold">role</Label>
+                            <Input type="text" placeholder="roles" className="py-4 text-lg h-10"
+                                value={role}
+                                onChange={changeRole} />
                         </div>
 
                         <Button onClick ={ handleRegister}className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">Register
