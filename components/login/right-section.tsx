@@ -35,7 +35,7 @@ export const RightSection = () => {
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "aplication/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     email: email,
@@ -80,7 +80,7 @@ export const RightSection = () => {
 
                     <div className="flex justify-center gap-2 mt-4 text-sm">
                         <span>Don't have an account cont?</span>
-                        <Link href="//registo" className="text-[#13A4EC] font-semibold">Create Account</Link>
+                        <Link href="//register" className="text-[#13A4EC] font-semibold">Create Account</Link>
                     </div>
                 </CardContent>
             </Card>
