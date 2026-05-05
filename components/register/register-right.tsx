@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader } from "../ui/card"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import Link from "next/link"
+import { toast } from "sonner"
+
 
 
 export const RegisterRight = () => {
@@ -17,7 +19,7 @@ export const RegisterRight = () => {
     const [country, setCountry] = useState("")
     const [locality, setLocality] = useState("")
     const [password, setPassword] = useState("")
-    const [role, setRole] = useState("")
+    const [enabled, setEnabled] = useState("")
 
     const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value) {
@@ -75,18 +77,11 @@ export const RegisterRight = () => {
             setPassword("")
         }
     };
-    const changeRole = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.value) {
-            setRole(e.target.value)
-        } else {
-            setRole("")
-        }
-    };
 
     const handleRegister = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         //fetch API
-        await fetch(
+        const response = await fetch(
             'http://localhost:8080/user/create',
             {
                 method: "POST",
@@ -102,12 +97,19 @@ export const RegisterRight = () => {
                     pais: country,
                     localidade: locality,
                     password: password,
-                    role: role
+                    role: "cliente",
+                    enabled: enabled
                 })
+            })
+        if (response.status === 200) {
+            toast.success("Utilizador criado com sucesso");
+
+            if (typeof window !== "undefined") {
+                window.location.href = "/login";
             }
-        ).then((response) => {
-            console.log(response.json())
-        });
+        } else {
+            toast.error("Nao foi possivel criar conta, tente novamente")
+        }
     };
 
     console.log({ nome: name, numero_identificacao: identificationNumber, data_nascimento: dateOfBirth, email: email, telefone: telephone, pais: country, localidade: locality, password: password });
@@ -178,19 +180,12 @@ export const RegisterRight = () => {
                                 onChange={changePassword} />
                         </div>
 
-                        <div>
-                            <Label className="font-bold">role</Label>
-                            <Input type="text" placeholder="roles" className="py-4 text-lg h-10"
-                                value={role}
-                                onChange={changeRole} />
-                        </div>
-
-                        <Button onClick ={ handleRegister}className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">Register
+                        <Button onClick={handleRegister} className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">Register
                         </Button>
                     </div>
                     <div className="flex justify-center gap-2 mt-4 text-sm">
                         <span>Already have an account?</span>
-                        <Link href="//registo" className="text-[#13A4EC] font-semibold">Sign In</Link>
+                        <Link href="/login" className="text-[#13A4EC] font-semibold">Sign In</Link>
                     </div>
                 </CardContent>
             </Card>

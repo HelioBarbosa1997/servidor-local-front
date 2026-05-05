@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from "../ui/card"
 import { Input } from "../ui/input"
 import { Label } from "../ui/label"
 import { useState } from "react"
+import { toast } from "sonner"
 
 export const RightSection = () => {
     //useState
@@ -30,7 +31,7 @@ export const RightSection = () => {
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         //fetch API
-        await fetch(
+        const response = await fetch(
             'http://localhost:8080/users/login',
             {
                 method: "POST",
@@ -41,13 +42,24 @@ export const RightSection = () => {
                     email: email,
                     password: password
                 })
+            })
+        if (response.status === 200) {
+            toast.success("login feito com sucesso");
+
+            const responseData = await response.json();
+
+            console.log({ "dados recebidos": responseData })
+
+            if (typeof window !== "undefined") {
+               // window.location.href = "/home";
             }
-        ).then((response) => {
-            console.log(response.json())
-        });
+        } else {
+            toast.error("Email ou senha incorreto!")
+        }
     };
 
-    console.log({email: email, password: password});
+
+    console.log({ email: email, password: password });
 
 
     return (
@@ -74,13 +86,13 @@ export const RightSection = () => {
                         </div>
 
                         <Button
-                        onClick={handleLogin}
-                        className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">Login</Button>
+                            onClick={handleLogin}
+                            className="bg-[#13A4EC] rounded-md text-white font-bold py-3 drop-shadow-lg drop-shadow-gray-200">Login</Button>
                     </div>
 
                     <div className="flex justify-center gap-2 mt-4 text-sm">
                         <span>Don't have an account cont?</span>
-                        <Link href="//register" className="text-[#13A4EC] font-semibold">Create Account</Link>
+                        <Link href="/register" className="text-[#13A4EC] font-semibold">Create Account</Link>
                     </div>
                 </CardContent>
             </Card>
