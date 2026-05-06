@@ -98,7 +98,7 @@ export const RegisterRight = () => {
                     localidade: locality,
                     password: password,
                     role: "cliente",
-                    enabled: enabled
+                    enabled: true
                 })
             })
         if (response.status === 200) {
@@ -140,7 +140,7 @@ export const RegisterRight = () => {
 
                         <div className="flex flex-col gap-2">
                             <Label className="font-bold">date of birth</Label>
-                            <Input type="date" placeholder="date of birth" className="py-4 text-lg h-10"
+                            <Input type="text" placeholder="date of birth" className="py-4 text-lg h-10"
                                 value={dateOfBirth}
                                 onChange={changeDateOfBirth} />
                         </div>
