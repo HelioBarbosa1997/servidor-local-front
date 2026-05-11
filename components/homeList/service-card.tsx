@@ -5,7 +5,7 @@ import { Card, CardContent } from "../ui/card";
 type ServiceCardProps = {
     title: string;
     description: string;
-    price: number;
+    price: string;
     image: string;
 };
 
@@ -40,7 +40,7 @@ ServiceCardProps) => {
 
                 <div className="flex items-center justify-between">
                     <span className="font-bold text-sky-600 text-lg">
-                        ${price.toFixed(2)}
+                        $${Number(price).toFixed(2)}
                     </span>
 
                     <button className="bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium px-4 py-2 rounded-xl transition">
