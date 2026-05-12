@@ -15,7 +15,7 @@ export const ServiceCard = ({
     price,
     image,
 }:
-ServiceCardProps) => {
+    ServiceCardProps) => {
     return (
         <Card className="rounded-2xl overflow-hidden border shadow-sm hover:shadow-md transition bg-white">
             <div className="relative h-40 w-full">
@@ -39,9 +39,10 @@ ServiceCardProps) => {
                 </div>
 
                 <div className="flex items-center justify-between">
-                    <span className="font-bold text-sky-600 text-lg">
-                        $${Number(price).toFixed(2)}
-                    </span>
+                    {price.includes("-")
+                        ? `$${price.trim()}`
+                        : `$${Number(price).toFixed(2)}`
+                    }
 
                     <button className="bg-sky-500 hover:bg-sky-600 text-white text-sm font-medium px-4 py-2 rounded-xl transition">
                         Browse Providers

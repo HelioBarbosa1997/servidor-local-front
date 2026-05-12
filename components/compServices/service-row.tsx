@@ -1,47 +1,62 @@
-import { Card, CardContent } from "@/components/ui/card";
+// components/compServices/service-row.tsx
 
 type ServiceRowProps = {
+    id: number;
     name: string;
-    provider: string;
-    urgent?: boolean;
+    checked: boolean;
+    urgent: boolean;
+    setChecked: React.Dispatch<
+        React.SetStateAction<Record<number, boolean>>
+    >;
+    setUrgent: React.Dispatch<
+        React.SetStateAction<Record<number, boolean>>
+    >;
 };
 
 export const ServiceRow = ({
+    id,
     name,
-    provider,
+    checked,
     urgent,
+    setChecked,
+    setUrgent,
 }: ServiceRowProps) => {
     return (
-        <Card className="rounded-xl shadow-sm border">
-            <CardContent className="grid grid-cols-4 items-center px-4 py-4 text-sm">
+        <div className="grid grid-cols-3 items-center border-t px-4 py-4 text-sm">
+            {/* Checkbox */}
+            <div>
+                <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() =>
+                        setChecked((prev) => ({
+                            ...prev,
+                            [id]: !checked,
+                        }))
+                    }
+                    className="w-4 h-4"
+                />
+            </div>
 
-                {/* Checkbox */}
-                <div>
-                    <input type="checkbox" className="w-4 h-4" />
-                </div>
+            {/* Service */}
+            <div className="font-medium text-gray-700">
+                {name}
+            </div>
 
-                {/* Nome */}
-                <div className="font-medium text-gray-700">
-                    {name}
-                </div>
-
-                {/* Provider */}
-                <div>
-                    <select className="w-full border rounded-md px-3 py-2 text-gray-600 bg-white">
-                        <option>{provider}</option>
-                    </select>
-                </div>
-
-                {/* Urgente */}
-                <div className="flex justify-center">
-                    <input
-                        type="checkbox"
-                        defaultChecked={urgent}
-                        className="w-4 h-4 accent-red-500"
-                    />
-                </div>
-
-            </CardContent>
-        </Card>
+            {/* Urgent */}
+            <div className="flex justify-center">
+                <input
+                    type="checkbox"
+                    checked={urgent}
+                    onChange={() =>
+                        setUrgent((prev) => ({
+                            ...prev,
+                            [id]: !urgent,
+                        }))
+                    }
+                    className="w-4 h-4"
+                />
+            </div>
+        </div>
     );
 };

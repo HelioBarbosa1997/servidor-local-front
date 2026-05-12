@@ -1,8 +1,6 @@
 import { Brush, Hammer, Paintbrush, Plug, Wrench } from "lucide-react";
 import { RatingFilter } from "../ui/rastingFilter";
 
-
-
 const categories = [
     {
         name: "All Services",

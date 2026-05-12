@@ -1,7 +1,7 @@
+// app/services/page.tsx
+
 import { FormService } from "@/components/compServices/form-service";
 import { Navbar } from "@/components/compServices/navbar-services";
-import { ServiceRow } from "@/components/compServices/service-row";
-
 
 export default function ServicePage() {
     return (
@@ -9,8 +9,7 @@ export default function ServicePage() {
             <Navbar />
 
             <main className="max-w-5xl mx-auto px-6 py-10">
-            
-                <FormService/>
+                <FormService />
             </main>
         </div>
     );
