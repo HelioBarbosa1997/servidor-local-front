@@ -1,4 +1,3 @@
-
 export const HeroBanner = () => {
     return (
         <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-sky-900 to-cyan-600 p-8 h-48 flex items-center">
